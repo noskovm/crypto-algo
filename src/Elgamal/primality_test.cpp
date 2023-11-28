@@ -24,6 +24,8 @@ bool PrimalityTest::checkProbRangeAndEvenNumber(int value, double minProb) {
         return false; //TODO придумать действия при ошибках как в контрактах
     if (::PrimalityTest::checkEvenNumber(value))
         return false;
+    if (value <= MIN_NUMBER_PRIM_TEST)
+        return false;
     return true;
 }
 //

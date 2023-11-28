@@ -1,5 +1,4 @@
-#ifndef CRYPTO_ALGO_PRIMALITY_TEST_H
-#define CRYPTO_ALGO_PRIMALITY_TEST_H
+#pragma once
 
 #include <iostream>
 #include <random>
@@ -27,7 +26,6 @@ private:
     bool checkEvenNumber(int value);
 public:
     bool checkProbRangeAndEvenNumber(int value, double minProb);
-    bool check_primary(int value, double minProb) override;
 };
 
 // Тест Ферма, реализующий абстрактный класс PrimalityTest
@@ -45,4 +43,3 @@ class MillerRabinTest: public PrimalityTest {
     bool check_primary(int value, double minProb) override;
 };
 
-#endif //CRYPTO_ALGO_PRIMALITY_TEST_H
