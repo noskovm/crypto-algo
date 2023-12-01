@@ -16,14 +16,12 @@ bool yes(IPrimalityTest &test) {
     return test.check_primary(2, 0.8);
 }
 
-
 int main() {
     setlocale(LC_ALL, "ru");
+    system("chcp 65001");
 
-    SolovayStrassenTest test;
+    cpp_int x("214483647");
 
-    std::cout << yes(test);
-
-    std::cout << boost::math::gcd(6, 15);
+    std::cout << searchGroupGenerator(x);
     return 0;
 }
