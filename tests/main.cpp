@@ -4,6 +4,8 @@
 #include <numeric>
 #include "primality_test.h"
 #include <boost/math/common_factor.hpp>
+#include "elgamal.h"
+#include "utils.h"
 /*
  * rand() % 100 + 1;     // v2 in the range 1 to 100
  *
@@ -20,8 +22,15 @@ int main() {
     setlocale(LC_ALL, "ru");
     system("chcp 65001");
 
-    cpp_int x("214483647");
+    Elgamal alg;
+    Keys keys = alg.keygen();
+    std::cout << keys.x << std::endl;
+    std::cout << keys.y << std::endl;
+    std::cout << keys.g << std::endl;
+    std::cout << keys.p << std::endl;
 
-    std::cout << searchGroupGenerator(x);
+    SolovayStrassenTest test;
+
+    //std::cout << searchGroupGenerator(cpp_int("19"));
     return 0;
 }

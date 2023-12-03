@@ -1,30 +1,34 @@
 #include "primality_test.h"
+#include "elgamal.h"
 #include "keys.h"
+#include <iostream>
 
-class Elgamal {
-public:
-    Elgamal() {
+//
+Elgamal::Elgamal() {
 
+}
+
+//TODO опять дублирование
+Keys Elgamal::keygen() {
+    Keys keys_set;
+    cpp_int value = generateRandomFromRangeCPP_INT( (unsigned long long)(LLONG_MAX) + 1, ULLONG_MAX);
+
+    SolovayStrassenTest test;
+    while(!test.check_primary(value, 0.9)) {
+        value = generateRandomFromRangeCPP_INT((unsigned long long)LLONG_MAX+1, ULLONG_MAX);
     }
-    class KeyGen {
-    public:
-        KeyGen() = default;
-        enum PrimeTest {
-            FERMAT,
-            SOLOVAYSTRASSEN,
-            MILLERRABIN
-        };
-    private:
-        PrimeTest primeTest;
-        double minProb;
-        int keyBitLength;
-    };
 
-//    void encrypt();
-//    void decrypt();
-//    std::pair<PublicKey, PrivateKey> keygen();
-};
-//
-//std::pair<PublicKey, PrivateKey> Elgamal::keygen() {
-//
-//}
+    keys_set.p = value;
+    keys_set.g = searchGroupGenerator(keys_set.p);
+
+    keys_set.x = generateRandomFromRangeCPP_INT( (unsigned long long)(LLONG_MAX) + 1, ULLONG_MAX);
+    // маловероятная ситуация, но все же
+    while((keys_set.x == keys_set.y) || (keys_set.x == keys_set.g))
+        keys_set.x = generateRandomFromRangeCPP_INT( (unsigned long long)(LLONG_MAX) + 1, ULLONG_MAX);
+
+    keys_set.y = modPow(keys_set.g, keys_set.x, keys_set.p, true);
+
+    return keys_set;
+}
+
+

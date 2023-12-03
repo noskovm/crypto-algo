@@ -8,6 +8,8 @@
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
+#include <boost/integer/static_log2.hpp>
+#include <boost/math/special_functions/round.hpp>
 #include "spdlog/spdlog.h"
 #include "utils.h"
 

@@ -17,15 +17,29 @@ ENDIF()
 include_directories(src/Elgamal
                     3rdParty)
 
-add_executable(crypto_algo
+#add_executable(crypto_algo
+#        src/Elgamal/primality_test.cpp
+#        tests/main.cpp
+#        src/Elgamal/primality_test.h
+#        src/Elgamal/primality_test.h
+#        src/Elgamal/elgamal.cpp
+#        src/Elgamal/keys.h
+#        src/Elgamal/utils.cpp
+#        src/Elgamal/utils.h
+#        src/Elgamal/utils.h
+#        src/Elgamal/elgamal.h
+#        src/Elgamal/elgamal.h
+#)
+
+add_library(crypto_algo SHARED
         src/Elgamal/primality_test.cpp
         tests/main.cpp
         src/Elgamal/primality_test.h
         src/Elgamal/primality_test.h
         src/Elgamal/elgamal.cpp
-        src/Elgamal/keys.cpp
         src/Elgamal/keys.h
         src/Elgamal/utils.cpp
         src/Elgamal/utils.h
         src/Elgamal/utils.h
-)
+        src/Elgamal/elgamal.h
+        src/Elgamal/elgamal.h)

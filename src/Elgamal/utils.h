@@ -9,10 +9,9 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include "spdlog/spdlog.h"
+#include <climits>
 
 using boost::multiprecision::cpp_int;
-
-
 
     // modPow выполняет операцию возведения в степень по модулю
     cpp_int modPow(cpp_int base, cpp_int pow, const cpp_int &mod, bool use_boost);
@@ -27,6 +26,12 @@ using boost::multiprecision::cpp_int;
 
     // модуль для cpp_int
     cpp_int cpp_abs(cpp_int value);
+
+    cpp_int gcd_euclid(cpp_int u, cpp_int v);
+
+    cpp_int simple_f(cpp_int x);
+
+    cpp_int jacobi(cpp_int a, cpp_int n);
 
 
 #endif //CRYPTO_ALGO_UTILS_H
