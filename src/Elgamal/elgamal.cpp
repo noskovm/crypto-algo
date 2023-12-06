@@ -33,45 +33,38 @@ void Elgamal::encrypt(std::string filePath) {
     if (!inputFile.is_open())
         return;
 
+    std::uintmax_t size = std::filesystem::file_size(filePath);
 
-    std::cout << "open" << std::endl;
+    long steps = size/16 + size%16;
 
-    // заводим область памати на 64 бита
-    char* buffer = new char[16]; //64 бита
-
-    //считываем символы в буфер
-    inputFile.read (buffer,16);
-
-    // переводим кусок памяти, указывающий на char* в указатель unsigned long long*
-    unsigned long long openNumber = *(reinterpret_cast<unsigned long long*>(&buffer));
-    std::cout << openNumber << std::endl;
-
-    //__________________________________
+    std::vector<std::pair<unsigned long long, unsigned long long>> openNumbers;
 
     Elgamal alg;
     Keys keys = alg.keygen();
 
-    cpp_int sessionKey = 13;
-    unsigned long long a = (unsigned long long)modPow(keys.g, sessionKey, keys.p, true);
-    unsigned long long b = (unsigned long long)((modPow(keys.y, sessionKey, keys.p, true)*openNumber)%keys.p);
 
-    //std::cout << "Pair chifrtext" << a << "," << b << std::endl;
+    for (long i = 0; i < steps; ++i) {
+        char* buffer = new char[16]; //64 бита
+        inputFile.read (buffer,16);
+        unsigned long long current = (*(reinterpret_cast<unsigned long long*>(&buffer)));
+        cpp_int sessionKey = 13;
+        unsigned long long a = (unsigned long long)modPow(keys.g, sessionKey, keys.p, true);
+        unsigned long long b = (unsigned long long)((modPow(keys.y, sessionKey, keys.p, true)*current)%keys.p);
 
-    std::cout << "Decrypt " << std::endl;
+        openNumbers.push_back(std::pair(a, b));
 
-    unsigned long long M = (unsigned long long)((modPow(cpp_int(a), keys.p - cpp_int(1) - keys.x, keys.p, true)*cpp_int(b)%keys.p));
+    }
 
-    std::cout << keys.p << std::endl << keys.x << std::endl;
-    std::cout << keys.p - cpp_int(1) - keys.x << std::endl;
-    std::cout << M << std::endl;
 
-    // заводим другую область памяти
-    char* buffer_other = new char[16];
-    // интерпретируем unsigned long long* в char*
-    buffer_other = reinterpret_cast<char*>(M);
-    std::cout << *(buffer_other + 15);
-
-    //____________--
+    std::ofstream outFile("out2.jpg", std::ios::binary);
+    for (long i = 0; i < steps; ++i) {
+        unsigned long long M = (unsigned long long)((modPow(cpp_int(openNumbers[i].first), keys.p - cpp_int(1) - keys.x, keys.p, true)*cpp_int(openNumbers[i].second)%keys.p));
+        // заводим другую область памяти
+        char* buffer_other = new char[16];
+        // интерпретируем unsigned long long* в char*
+        buffer_other = reinterpret_cast<char*>(M);
+        outFile.write(buffer_other, 16);
+    }
 
     inputFile.close();
 

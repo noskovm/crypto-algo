@@ -18,7 +18,7 @@ int main() {
 
     Elgamal alg;
 
-    alg.encrypt("C:\\Users\\noskovm\\CLionProjects\\crypto-algo\\file.txt");
+    alg.encrypt("C:\\Users\\noskovm\\CLionProjects\\crypto-algo\\test.jpg");
 
     return 0;
 }
