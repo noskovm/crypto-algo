@@ -1,7 +1,6 @@
 #include "utils.h"
 
 cpp_int modPow(cpp_int base, cpp_int pow, const cpp_int &mod, bool use_boost) {
-
     if (use_boost) {
         return boost::multiprecision::powm(base, pow, mod);
     }

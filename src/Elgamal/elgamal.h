@@ -11,27 +11,30 @@
 #include "spdlog/spdlog.h"
 #include "keys.h"
 #include <climits>
+#include <fstream>
+#include <string>
+#include <vector>
 
 using boost::multiprecision::cpp_int;
 
 class Elgamal {
 public:
-    Elgamal();
-    class KeyGen {
-    public:
-        KeyGen() = default;
-        enum PrimeTest {
-            FERMAT,
-            SOLOVAYSTRASSEN,
-            MILLERRABIN
-        };
-    private:
-        PrimeTest primeTest;
-        double minProb;
-        int keyBitLength;
-    };
+//    Elgamal();
+//    class KeyGen {
+//    public:
+//        KeyGen() = default;
+//        enum PrimeTest {
+//            FERMAT,
+//            SOLOVAYSTRASSEN,
+//            MILLERRABIN
+//        };
+//    private:
+//        PrimeTest primeTest;
+//        double minProb;
+//        int keyBitLength;
+//    };
     Keys keygen();
-//    void encrypt();
+    void encrypt(std::string filePath);
 //    void decrypt();
     //std::pair<PublicKey, PrivateKey> keygen();
 };

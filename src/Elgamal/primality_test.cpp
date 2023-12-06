@@ -40,8 +40,8 @@ bool SolovayStrassenTest::check_primary(cpp_int value, double minProb) {
 
     cpp_int randA;
     double curProb;
+    // TODO пересмотреть?
     int steps = boost::math::lround(log2(1 / (1 - minProb)) + 0.5) + 1;
-    std::cout << "steps "  << steps;
     for (int i = 0; i < steps; ++i) {
         randA = dist(gen);
         if (gcd_euclid(randA, value) > 1)
@@ -51,7 +51,7 @@ bool SolovayStrassenTest::check_primary(cpp_int value, double minProb) {
         }
         curProb = 1 - pow(2, -i);
     }
-    std::cout << "curProb " << curProb << std::endl;
+
     return true;
 }
 //

@@ -17,7 +17,6 @@ using boost::multiprecision::cpp_int;
 
 const int MIN_NUMBER_PRIM_TEST = 3; // левая граница диапазона поиска чисел 'a' из теста Соловея-Штрассена
 
-
 // Интерфейс для класса Вероятностной проверки простоты. Контракт - check_primary - проверить на простоту
 class IPrimalityTest {
 public:

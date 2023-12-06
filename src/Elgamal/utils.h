@@ -27,10 +27,13 @@ using boost::multiprecision::cpp_int;
     // модуль для cpp_int
     cpp_int cpp_abs(cpp_int value);
 
+    // алгоритм нахождения НОД для больших чисел
     cpp_int gcd_euclid(cpp_int u, cpp_int v);
 
+    // функция нелинейного преобразования, необходимая в функции searchGroupGenerator
     cpp_int simple_f(cpp_int x);
 
+    // jacobi находит символ Яккоби
     cpp_int jacobi(cpp_int a, cpp_int n);
 
 
