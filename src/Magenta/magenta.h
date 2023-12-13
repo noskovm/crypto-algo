@@ -42,7 +42,7 @@ std::bitset<128> round_function(std::bitset<128> block, std::bitset<64> key);
 
 std::bitset<128> encrypt(std::bitset<128> block, std::bitset<64> key1, std::bitset<64> key2);
 
-std::bitset<128> decrypt(std::bitset<128> block);
+std::bitset<128> decrypt(std::bitset<128> block, std::bitset<64> key1, std::bitset<64> key2);
 
 std::vector<std::bitset<8>> getByteArray8(std::bitset<128> block);
 

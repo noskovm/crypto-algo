@@ -19,10 +19,17 @@ int main() {
     std::bitset<64> key2("1010100111011100010000000010000000");
     std::vector<std::bitset<8>> bytes1 = getByteArray8(x);
 
+    std::bitset<128> KEY(key1.to_string() + key2.to_string());
+    std::vector<std::bitset<8>> batck_key = getByteArray8(KEY);
+
+
+
+
     std::bitset<128> encrypted = encrypt(x, key1, key2);
-    std::bitset<128> decrypted = decrypt(encrypted);
+    std::bitset<128> decrypted = decrypt(encrypted, key1, key2);
 
     std::cout << decrypted;
+
 
     return 0;
 }

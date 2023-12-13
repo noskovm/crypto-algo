@@ -83,7 +83,7 @@ std::bitset<128> encrypt(std::bitset<128> block, std::bitset<64> key1, std::bits
     return x;
 }
 
-std::bitset<128> decrypt(std::bitset<128> block) {
+std::bitset<128> decrypt(std::bitset<128> block, std::bitset<64> key1, std::bitset<64> key2) {
     std::vector<std::bitset<8>> batch = getByteArray8(block);
 
     std::string open;
@@ -96,7 +96,23 @@ std::bitset<128> decrypt(std::bitset<128> block) {
         open += batch[i].to_string();
     }
 
-    return std::bitset<128>(open);
+    std::bitset<128> v_m(open);
+
+    std::bitset<128> v1_m = encrypt(v_m, key1, key2);
+
+    std::vector<std::bitset<8>> batch2 = getByteArray8(v1_m);
+
+    std::string open2;
+
+    for(int i = 8; i < 16; ++i) {
+        open2 += batch2[i].to_string();
+    }
+
+    for(int i = 0; i < 8; ++i) {
+        open2 += batch2[i].to_string();
+    }
+
+    return std::bitset<128>(open2);
 }
 
 std::vector<std::bitset<8>> getByteArray8(std::bitset<128> block) {
