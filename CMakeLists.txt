@@ -15,6 +15,7 @@ IF (Boost_FOUND)
 ENDIF()
 
 include_directories(src/Elgamal
+                    src/Magenta
                     3rdParty)
 
 add_executable(crypto_algo
@@ -29,6 +30,8 @@ add_executable(crypto_algo
         src/Elgamal/utils.h
         src/Elgamal/elgamal.h
         src/Elgamal/elgamal.h
+        src/Magenta/magenta.cpp
+        src/Magenta/magenta.h
 )
 
 #add_library(crypto_algo SHARED

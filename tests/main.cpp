@@ -6,19 +6,19 @@
 #include <boost/math/common_factor.hpp>
 #include "elgamal.h"
 #include "utils.h"
-
-
-bool yes(IPrimalityTest &test) {
-    return test.check_primary(2, 0.8);
-}
+#include "magenta.h"
+#include <string>
+#include <cstdint>
 
 int main() {
     setlocale(LC_ALL, "ru");
     system("chcp 65001");
 
-    Elgamal alg;
+    std::bitset<128> M(23423441);
+    //std::cout << "Open text " << std::endl << M.to_string() << std::endl;
+    std::bitset<64> key1(3242342);
+    std::bitset<64> key2(562312);
 
-    alg.encrypt("C:\\Users\\noskovm\\CLionProjects\\crypto-algo\\test.jpg");
 
     return 0;
 }
