@@ -28,20 +28,26 @@ int f(int index);
 
 int A(int x, int y);
 
-std::pair<std::bitset<8>, std::bitset<8>> PE(int x, int y);
+std::bitset<16> PE(int x, int y);
 
-std::bitset<128> P(std::bitset<128> open);
+std::bitset<128> P(std::bitset<128> block);
 
 std::bitset<128> T(std::bitset<128> block);
 
-std::bitset<128> Sp(std::bitset<128> open);
+std::bitset<128> Sp(std::bitset<128> block);
 
-std::bitset<128> C(std::bitset<128> open, int k);
+std::bitset<128> C(int k, std::bitset<128> block);
 
-std::bitset<128> round_fuction(std::bitset<128> x, std::bitset<64> key);
+std::bitset<128> round_function(std::bitset<128> block, std::bitset<64> key);
 
 std::bitset<128> encrypt(std::bitset<128> block, std::bitset<64> key1, std::bitset<64> key2);
 
 std::bitset<128> decrypt(std::bitset<128> block);
+
+std::vector<std::bitset<8>> getByteArray8(std::bitset<128> block);
+
+std::bitset<64> getPart(std::bitset<128> block, short index);
+
+std::bitset<64> feistel(std::bitset<128> block, std::bitset<64> key);
 
 #endif //CRYPTO_ALGO_MAGENTA_H

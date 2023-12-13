@@ -14,11 +14,15 @@ int main() {
     setlocale(LC_ALL, "ru");
     system("chcp 65001");
 
-    std::bitset<128> M(23423441);
-    //std::cout << "Open text " << std::endl << M.to_string() << std::endl;
-    std::bitset<64> key1(3242342);
-    std::bitset<64> key2(562312);
+    std::bitset<128> x("01101010110100110000011011100110111010011101010101010011101111000000000000000000000000000000000000000000001100010111100101100110");
+    std::bitset<64> key1("11010101101001100000110111001101110");
+    std::bitset<64> key2("1010100111011100010000000010000000");
+    std::vector<std::bitset<8>> bytes1 = getByteArray8(x);
 
+    std::bitset<128> encrypted = encrypt(x, key1, key2);
+    std::bitset<128> decrypted = decrypt(encrypted);
+
+    std::cout << decrypted;
 
     return 0;
 }
