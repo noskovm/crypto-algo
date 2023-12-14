@@ -3,7 +3,7 @@
 #include "keys.h"
 #include <iostream>
 
-//TODO опять дублирование
+// keygen
 Keys Elgamal::keygen() {
     Keys keys_set;
     cpp_int value = generateRandomFromRangeCPP_INT( (unsigned long long)(LLONG_MAX) + 1, ULLONG_MAX);
@@ -26,76 +26,17 @@ Keys Elgamal::keygen() {
     return keys_set;
 }
 
-void Elgamal::encrypt(std::string filePath) {
-    std::ifstream inputFile;
-    inputFile.open(filePath, std::ios::binary);
+std::pair<cpp_int, cpp_int> Elgamal::encrypt(cpp_int M, cpp_int y, cpp_int g, cpp_int p) {
+    if (M > p) std::cout << "M must be small than p!";
 
-    if (!inputFile.is_open())
-        return;
+    //cpp_int sessionKey = generateRandomFromRangeCPP_INT((unsigned long long)LLONG_MAX+1, ULLONG_MAX);
+    cpp_int sessionKey = 13;
+    cpp_int a =modPow(g, sessionKey, p, true);
+    cpp_int b =((modPow(y, sessionKey, p, true)*M)%p);
 
-    std::uintmax_t size = std::filesystem::file_size(filePath);
-
-    long steps = size/8 + size%8;
-
-    std::vector<std::pair<unsigned long long, unsigned long long>> openNumbers;
-
-    Elgamal alg;
-    Keys keys = alg.keygen();
-
-    std::ofstream encFile("enc204.txt", std::ios::binary);
-
-    for (long i = 0; i < steps; ++i) {
-        char* buffer = new char[8]; //64 бита
-        char* buffer_other = new char[8];
-
-        inputFile.read (buffer,8);
-        unsigned long long current = (*(reinterpret_cast<unsigned long long*>(&buffer)));
-        //std::cout << "current = " << current << std::endl;
-        cpp_int sessionKey = 13;
-        unsigned long long a = (unsigned long long) modPow(keys.g, sessionKey, keys.p, true);
-        unsigned long long b = (unsigned long long)((modPow(keys.y, sessionKey, keys.p, true)*current)%keys.p);
-
-        std::cout << "cur = " << current << std::endl;
-        std::cout << "a og = " << a << std::endl;
-        std::cout << "b og = " << b << std::endl;
-
-        if (i == 0) {
-            char* buffer_sign = new char[8];
-            buffer_sign = (reinterpret_cast<char*>(&a));
-            encFile.write(buffer_sign, 8);
-        }
-        buffer_other = (reinterpret_cast<char*>(&b));
-        encFile.write(buffer_other, 8);
-        //openNumbers.push_back(std::pair(a, b));
-    }
-
-    std::ifstream IencFile("enc204.txt", std::ios::binary);
-    char* buffer_sign = new char[8];
-    IencFile.read (buffer_sign,8);
-    unsigned long long a_sign = (*(reinterpret_cast<unsigned long long*>(&buffer_sign)));
-    std::ofstream outFile("out204.txt", std::ios::binary);
-
-    std::cout << "a sign = " << a_sign << std::endl;
-
-    for (long i = 0; i < steps; ++i) {
-        char* buffer_b = new char[8];
-        IencFile.read (buffer_b,8);
-
-        unsigned long long b = (*(reinterpret_cast<unsigned long long*>(&buffer_b)));
-        if(i == 0) {
-            std::cout << "b " << b << std::endl;
-        }
-        unsigned long long M = (unsigned long long)((modPow(cpp_int(a_sign), keys.p - cpp_int(1) - keys.x, keys.p, true)*cpp_int(b)%keys.p));
-        std::cout << "M = " << M << std::endl;
-        // заводим другую область памяти
-        char* buffer_other = new char[8];
-        // интерпретируем unsigned long long* в char*
-        buffer_other = reinterpret_cast<char*>(&M);
-        outFile.write(buffer_other, 8);
-    }
-
-    inputFile.close();
-
+    return std::pair<cpp_int, cpp_int>(a, b);
 }
 
-
+cpp_int Elgamal::decrypt(cpp_int a, cpp_int b, cpp_int x, cpp_int p) {
+    return ((modPow(a, p - cpp_int(1) - x, p, true)*b%p));
+}

@@ -34,10 +34,15 @@ public:
 //        double minProb;
 //        int keyBitLength;
 //    };
+
+    // key generation
     Keys keygen();
-    void encrypt(std::string filePath);
-//    void decrypt();
-    //std::pair<PublicKey, PrivateKey> keygen();
+
+    // opentext, y, g, p
+    std::pair<cpp_int, cpp_int> encrypt(cpp_int M, cpp_int y, cpp_int g, cpp_int p);
+
+    // a,b,x,p
+    cpp_int decrypt(cpp_int a, cpp_int b, cpp_int x, cpp_int p);
 };
 
 #endif //CRYPTO_ALGO_ELGAMAL_H

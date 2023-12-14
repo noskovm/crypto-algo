@@ -16,6 +16,7 @@ ENDIF()
 
 include_directories(src/Elgamal
                     src/Magenta
+                    src
                     3rdParty)
 
 add_executable(crypto_algo
@@ -32,6 +33,13 @@ add_executable(crypto_algo
         src/Elgamal/elgamal.h
         src/Magenta/magenta.cpp
         src/Magenta/magenta.h
+        src/file_utils.cpp
+        src/file_utils.cpp
+        src/file_utils.h
+        src/Magenta/mag_file_processing.cpp
+        src/Magenta/mag_file_processing.h
+        src/Elgamal/elg_file_processing.cpp
+        src/Elgamal/elg_file_processing.h
 )
 
 #add_library(crypto_algo SHARED
