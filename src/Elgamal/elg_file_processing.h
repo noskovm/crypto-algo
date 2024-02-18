@@ -6,13 +6,13 @@
 using boost::multiprecision::cpp_int;
 
 
-void e_encrypt_file(std::string inputFilePath,
+void elgamal_encrypt_file(std::string inputFilePath,
                     std::string outputFilePath,
                     cpp_int y,
                     cpp_int g,
                     cpp_int p);
 
-void e_decrypt_file(std::string inputFilename,
+void elgamal_decrypt_file(std::string inputFilename,
                     std::string outputFilename,
                     cpp_int x,
                     cpp_int p);

@@ -2,6 +2,7 @@
 #define CRYPTO_ALGO_MAGENTA_H
 
 #include <bitset>
+#include <algorithm>
 #include <vector>
 
 const std::vector<int> S = {

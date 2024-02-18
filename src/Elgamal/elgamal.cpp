@@ -27,7 +27,7 @@ Keys Elgamal::keygen() {
 }
 
 std::pair<cpp_int, cpp_int> Elgamal::encrypt(cpp_int M, cpp_int y, cpp_int g, cpp_int p) {
-    if (M > p) std::runtime_error::exception("M must be small than p");
+    //if (M > p) std::runtime_error::exception("M must be small than p");
 
     cpp_int sessionKey = generateRandomFromRangeCPP_INT((unsigned long long)1, (unsigned long long)(p-1));
     cpp_int a =modPow(g, sessionKey, p, true);

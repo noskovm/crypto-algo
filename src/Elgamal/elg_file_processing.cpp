@@ -1,7 +1,7 @@
 #include "elg_file_processing.h"
 #include "elgamal.h"
 
-void e_encrypt_file(std::string inputFilePath,
+void elgamal_encrypt_file(std::string inputFilePath,
                      std::string outputFilePath,
                      cpp_int y,
                      cpp_int g,
@@ -28,7 +28,7 @@ void e_encrypt_file(std::string inputFilePath,
     outputFile.close();
 }
 
-void e_decrypt_file(std::string inputFilename,
+void elgamal_decrypt_file(std::string inputFilename,
                      std::string outputFilename,
                      cpp_int x,
                      cpp_int p) {

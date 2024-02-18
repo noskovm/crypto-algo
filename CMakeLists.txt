@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.22)
 project(crypto_algo)
 
 set(CMAKE_CXX_STANDARD 17)
 
 
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "C:/Program Files/boost/boost_1_83_0/")
-SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "C:/Program Files/boost/boost_1_83_0/lib64-msvc-14.3/")
+#SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "C:/Program Files/boost/boost_1_83_0/")
+#SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "C:/Program Files/boost/boost_1_83_0/lib64-msvc-14.3/")
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)
@@ -17,7 +17,7 @@ include_directories(src/Elgamal/
                     src/Magenta
                     src)
 
-add_library(crypto_algo STATIC
+add_executable(crypto_algo
         tests/main.cpp
         src/Elgamal/primality_test.cpp
         src/Elgamal/primality_test.h
