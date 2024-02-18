@@ -12,13 +12,13 @@ int main() {
     Elgamal alg;
     Keys kset = alg.keygen();
 
-    e_encrypt_file(R"(C:\Users\noskovm\CLionProjects\crypto-algo\lesnik.mp3)",
-                     R"(C:\Users\noskovm\CLionProjects\crypto-algo\tmp)",
-                          kset.y, kset.g, kset.p);
-
-    e_decrypt_file(R"(C:\Users\noskovm\CLionProjects\crypto-algo\tmp)",
-                     R"(C:\Users\noskovm\CLionProjects\crypto-algo\lesnikout.mp3)",
-                     kset.x, kset.p);
+//    e_encrypt_file(R"(C:\Users\noskovm\CLionProjects\crypto-algo\lesnik.mp3)",
+//                     R"(C:\Users\noskovm\CLionProjects\crypto-algo\tmp.txt)",
+//                          kset.y, kset.g, kset.p);
+//
+//    e_decrypt_file(R"(C:\Users\noskovm\CLionProjects\crypto-algo\tmp.txt)",
+//                     R"(C:\Users\noskovm\CLionProjects\crypto-algo\lesnikout.mp3)",
+//                     kset.x, kset.p);
 
     return 0;
 }

@@ -48,6 +48,10 @@ cpp_int cpp_abs(cpp_int value) {
     return value;
 }
 
+void hello() {
+    std::cout << "hello";
+}
+
 cpp_int gcd_euclid(cpp_int u, cpp_int v) {
     while (true) {
         if (!v) return u;
